@@ -47,14 +47,22 @@ const ModelComparison: React.FC<ModelComparisonProps> = ({ equipment }) => {
     { name: 'LSTM', MAE: modelPerformanceData[2].mae, RMSE: modelPerformanceData[2].rmse },
   ];
 
+  // Custom formatter for tooltip that handles both number and string types
+  const customFormatter = (value: any) => {
+    if (typeof value === 'number') {
+      return value.toFixed(2);
+    }
+    return value;
+  };
+
   return (
-    <Card className="glass-card h-full animate-fade-in">
+    <Card className="backdrop-blur-sm bg-white/10 dark:bg-black/30 border border-white/20 dark:border-white/10 h-full animate-fade-in">
       <CardHeader className="pb-2">
         <CardTitle className="text-lg">Model Comparison</CardTitle>
       </CardHeader>
       <CardContent>
         <Tabs defaultValue="predictions">
-          <TabsList className="glass-input">
+          <TabsList className="bg-secondary/50 backdrop-blur-sm">
             <TabsTrigger value="predictions">Predictions</TabsTrigger>
             <TabsTrigger value="performance">Performance</TabsTrigger>
             <TabsTrigger value="error">Error Metrics</TabsTrigger>
@@ -124,7 +132,12 @@ const ModelComparison: React.FC<ModelComparisonProps> = ({ equipment }) => {
                   />
                   <Legend />
                   <Tooltip 
-                    formatter={(value) => [value.toFixed(2), 'Score']}
+                    formatter={(value) => {
+                      if (typeof value === 'number') {
+                        return [value.toFixed(2), 'Score'];
+                      }
+                      return [value, 'Score'];
+                    }}
                     contentStyle={{ 
                       backgroundColor: 'rgba(255, 255, 255, 0.9)', 
                       borderRadius: '8px',

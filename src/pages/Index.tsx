@@ -7,19 +7,18 @@ import ModelComparison from '@/components/ModelComparison';
 import MaintenanceSchedule from '@/components/MaintenanceSchedule';
 import PredictionTimeline from '@/components/PredictionTimeline';
 import { mockEquipment, mockMaintenanceTasks } from '@/utils/mockData';
-import { Card, CardContent } from '@/components/ui/card';
 import { Equipment } from '@/utils/mockData';
 
 const Index = () => {
   const [selectedEquipment, setSelectedEquipment] = useState<Equipment>(mockEquipment[0]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-background to-secondary/50 text-foreground">
+    <div className="min-h-screen bg-gradient-to-b from-slate-900 via-indigo-900/30 to-slate-900 text-white">
       <div className="container mx-auto px-4 py-4 max-w-7xl">
         <Header />
         
         <div className="mb-8 animate-fade-in animate-delay-100">
-          <h2 className="text-3xl font-medium">Equipment Overview</h2>
+          <h2 className="text-3xl font-medium bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-indigo-300">Equipment Overview</h2>
           <p className="text-muted-foreground mt-1">Monitor and predict maintenance needs for manufacturing equipment</p>
         </div>
         
@@ -37,7 +36,7 @@ const Index = () => {
         
         {/* Selected Equipment Details */}
         <div className="mb-4 animate-fade-in animate-delay-300">
-          <h3 className="text-xl font-medium">{selectedEquipment.name} Analysis</h3>
+          <h3 className="text-xl font-medium bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-indigo-300">{selectedEquipment.name} Analysis</h3>
           <p className="text-muted-foreground text-sm">Detailed analytics and predictions</p>
         </div>
         
@@ -61,7 +60,7 @@ const Index = () => {
         
         {/* Additional Equipment Grid */}
         <div className="mb-4 animate-fade-in animate-delay-400">
-          <h3 className="text-xl font-medium">Other Equipment</h3>
+          <h3 className="text-xl font-medium bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-indigo-300">Other Equipment</h3>
           <p className="text-muted-foreground text-sm">Monitor additional equipment status</p>
         </div>
         
@@ -78,10 +77,10 @@ const Index = () => {
       </div>
       
       {/* Footer */}
-      <footer className="py-6 px-4 bg-background/50 backdrop-blur-sm border-t border-white/10">
+      <footer className="py-6 px-4 backdrop-blur-sm border-t border-white/10">
         <div className="container mx-auto max-w-7xl text-center">
           <p className="text-sm text-muted-foreground">
-            Predictive Maintenance Dashboard | NASA Turbofan Engine Degradation Simulation Data
+            Predictive Maintenance Dashboard | Extion Infotech | NASA Turbofan Engine Degradation Simulation Data
           </p>
         </div>
       </footer>

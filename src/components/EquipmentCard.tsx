@@ -49,7 +49,7 @@ const EquipmentCard: React.FC<EquipmentCardProps> = ({ equipment, onClick }) => 
   
   return (
     <Card 
-      className="glass-card hover:shadow-md transition-all duration-300 cursor-pointer overflow-hidden h-full flex flex-col animate-scale-in" 
+      className="hover:shadow-md transition-all duration-300 cursor-pointer overflow-hidden h-full flex flex-col animate-scale-in backdrop-blur-sm bg-white/10 dark:bg-black/30 border border-white/20 dark:border-white/10" 
       onClick={() => onClick(equipment)}
     >
       <CardHeader className="pb-2">
@@ -65,7 +65,12 @@ const EquipmentCard: React.FC<EquipmentCardProps> = ({ equipment, onClick }) => 
       </CardHeader>
       <CardContent className="flex flex-col flex-grow justify-between">
         <div className="space-y-4">
-          <Progress value={healthIndex} className="h-1.5" indicatorClassName={getProgressColor()} />
+          <div className="relative h-1.5 w-full bg-secondary rounded-full overflow-hidden">
+            <div 
+              className={`absolute top-0 left-0 h-full ${getProgressColor()} rounded-full`} 
+              style={{ width: `${healthIndex}%` }}
+            />
+          </div>
           
           <div className="grid grid-cols-2 gap-2 text-xs">
             <div className="space-y-1">

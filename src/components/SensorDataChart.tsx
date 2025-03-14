@@ -1,6 +1,6 @@
 
 import React, { useState, useMemo } from 'react';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, ReferenceLine } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, ReferenceLine, Scatter } from 'recharts';
 import { Equipment, SensorReading } from '@/utils/mockData';
 import { extractSensorData, smoothSensorData, detectAnomalies } from '@/utils/dataProcessor';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -56,13 +56,13 @@ const SensorDataChart: React.FC<SensorDataChartProps> = ({ equipment }) => {
   }, [chartData]);
 
   return (
-    <Card className="glass-card h-full animate-fade-in">
+    <Card className="backdrop-blur-sm bg-white/10 dark:bg-black/30 border border-white/20 dark:border-white/10 h-full animate-fade-in">
       <CardHeader className="pb-2">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <CardTitle className="text-lg">Sensor Data Analysis</CardTitle>
           <div className="flex items-center gap-2">
             <Select value={selectedSensor as string} onValueChange={(value) => setSelectedSensor(value as keyof SensorReading)}>
-              <SelectTrigger className="glass-input w-[180px]">
+              <SelectTrigger className="bg-white/40 dark:bg-white/5 border border-white/30 dark:border-white/10 backdrop-blur-sm w-[180px]">
                 <SelectValue placeholder="Select sensor" />
               </SelectTrigger>
               <SelectContent>
@@ -118,16 +118,22 @@ const SensorDataChart: React.FC<SensorDataChartProps> = ({ equipment }) => {
                 dot={false} 
                 activeDot={{ r: 6, stroke: 'rgba(59, 130, 246, 1)', strokeWidth: 1 }}
               />
-              {anomalies.map((point, index) => (
-                <ReferenceDot
-                  key={`anomaly-${index}`}
-                  x={point.cycle}
-                  y={point.value}
-                  r={4}
+              
+              {/* Display anomalies as scatter points */}
+              {showAnomalies && anomalies.length > 0 && (
+                <Scatter
+                  name="Anomalies"
+                  data={anomalies}
                   fill="rgba(239, 68, 68, 0.8)"
-                  stroke="rgba(239, 68, 68, 1)"
+                  line={false}
+                  shape={(props) => {
+                    const { cx, cy } = props;
+                    return (
+                      <circle cx={cx} cy={cy} r={4} fill="rgba(239, 68, 68, 0.8)" stroke="rgba(239, 68, 68, 1)" />
+                    );
+                  }}
                 />
-              ))}
+              )}
             </LineChart>
           </ResponsiveContainer>
         </div>

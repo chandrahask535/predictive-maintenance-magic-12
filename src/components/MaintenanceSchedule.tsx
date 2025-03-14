@@ -72,7 +72,7 @@ const MaintenanceSchedule: React.FC<MaintenanceScheduleProps> = ({ tasks }) => {
     return (
       <div 
         key={task.id} 
-        className="glass-panel p-3 rounded-lg flex items-center justify-between gap-2 animate-fade-in"
+        className="bg-white/10 dark:bg-white/5 backdrop-blur-sm border border-white/20 dark:border-white/10 p-3 rounded-lg flex items-center justify-between gap-2 animate-fade-in shadow-sm hover:shadow-md transition-all duration-300"
       >
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2">
@@ -94,7 +94,7 @@ const MaintenanceSchedule: React.FC<MaintenanceScheduleProps> = ({ tasks }) => {
   };
   
   return (
-    <Card className="glass-card h-full animate-fade-in">
+    <Card className="backdrop-blur-sm bg-white/10 dark:bg-black/30 border border-white/20 dark:border-white/10 h-full animate-fade-in">
       <CardHeader className="pb-2">
         <div className="flex justify-between items-center">
           <CardTitle className="text-lg">Maintenance Schedule</CardTitle>
@@ -114,7 +114,7 @@ const MaintenanceSchedule: React.FC<MaintenanceScheduleProps> = ({ tasks }) => {
           <div className="space-y-6">
             {thisWeekTasks.length > 0 && (
               <div>
-                <h3 className="text-sm font-medium mb-2">This Week</h3>
+                <h3 className="text-sm font-medium mb-2 text-primary">This Week</h3>
                 <div className="space-y-2">
                   {thisWeekTasks.map(renderTask)}
                 </div>
@@ -123,7 +123,7 @@ const MaintenanceSchedule: React.FC<MaintenanceScheduleProps> = ({ tasks }) => {
             
             {nextWeekTasks.length > 0 && (
               <div>
-                <h3 className="text-sm font-medium mb-2">Next Week</h3>
+                <h3 className="text-sm font-medium mb-2 text-primary">Next Week</h3>
                 <div className="space-y-2">
                   {nextWeekTasks.map(renderTask)}
                 </div>
@@ -132,7 +132,7 @@ const MaintenanceSchedule: React.FC<MaintenanceScheduleProps> = ({ tasks }) => {
             
             {laterTasks.length > 0 && (
               <div>
-                <h3 className="text-sm font-medium mb-2">Later</h3>
+                <h3 className="text-sm font-medium mb-2 text-primary">Later</h3>
                 <div className="space-y-2">
                   {laterTasks.map(renderTask)}
                 </div>
