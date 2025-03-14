@@ -3,8 +3,11 @@ import React from 'react';
 import { Settings, Database, Activity, ChevronDown, Bell, BarChart2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
+import { useNavigate } from 'react-router-dom';
 
 const Header: React.FC = () => {
+  const navigate = useNavigate();
+  
   return (
     <header className="bg-gradient-to-r from-slate-900/90 via-indigo-950/80 to-slate-900/90 border-b border-white/10 px-6 py-4 sticky top-0 z-30 backdrop-blur-lg mb-8 animate-fade-in shadow-lg">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
@@ -31,6 +34,15 @@ const Header: React.FC = () => {
         </div>
 
         <div className="flex items-center space-x-3">
+          <Button 
+            variant="outline" 
+            size="sm" 
+            className="gap-2 bg-white/5 border-white/10 hover:bg-white/10 transition-all"
+            onClick={() => navigate('/python-streamlit')}
+          >
+            <span className="hidden sm:inline">Python Version</span>
+          </Button>
+          
           <Button variant="outline" size="sm" className="relative bg-white/5 border-white/10 hover:bg-white/10 transition-all">
             <Bell size={16} />
             <span className="absolute -top-1 -right-1 size-2.5 bg-blue-500 rounded-full animate-pulse"></span>
