@@ -1,5 +1,5 @@
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Nunito+Sans:wght@300;400;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -74,13 +74,21 @@
     @apply border-border;
   }
 
+  html {
+    @apply scroll-smooth;
+  }
+
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans;
     font-feature-settings: "rlig" 1, "calt" 1;
+    background-image: 
+      radial-gradient(circle at 15% 50%, rgba(17, 24, 39, 0) 0%, rgba(17, 24, 39, 0.7) 25%, rgba(17, 24, 39, 0) 50%),
+      radial-gradient(circle at 85% 30%, rgba(79, 70, 229, 0) 0%, rgba(79, 70, 229, 0.15) 20%, rgba(79, 70, 229, 0) 40%);
+    background-attachment: fixed;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-sans font-medium tracking-tight;
+    @apply font-sans font-semibold tracking-tight;
   }
 
   h1 {
@@ -114,20 +122,33 @@
   }
   
   ::-webkit-scrollbar-thumb {
-    @apply bg-muted-foreground/30 rounded-full hover:bg-muted-foreground/50 transition-colors;
+    @apply bg-white/20 rounded-full hover:bg-white/30 transition-colors;
   }
 }
 
+/* Card Styles */
 .glass-card {
-  @apply bg-white/80 dark:bg-black/40 backdrop-blur-lg border border-white/20 dark:border-white/10 shadow-sm;
+  @apply bg-slate-900/40 backdrop-blur-lg border border-white/10 shadow-xl shadow-slate-900/10;
+  position: relative;
+  overflow: hidden;
+}
+
+.glass-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -50%;
+  width: 200%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
 }
 
 .glass-panel {
-  @apply bg-white/60 dark:bg-black/30 backdrop-blur-md border border-white/20 dark:border-white/10;
+  @apply bg-slate-900/60 backdrop-blur-md border border-white/10 shadow-lg;
 }
 
 .glass-input {
-  @apply bg-white/40 dark:bg-white/5 border border-white/30 dark:border-white/10 backdrop-blur-sm focus:ring-2 focus:ring-primary/30;
+  @apply bg-slate-800/40 border border-white/10 backdrop-blur-sm focus:ring-2 focus:ring-blue-500/30;
 }
 
 /* Animation utilities */
@@ -149,4 +170,61 @@
 
 .animate-delay-500 {
   animation-delay: 500ms;
+}
+
+/* Custom Animations */
+@keyframes pulse-border {
+  0%, 100% {
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+  50% {
+    border-color: rgba(79, 70, 229, 0.3);
+  }
+}
+
+.animate-pulse-border {
+  animation: pulse-border 2s ease-in-out infinite;
+}
+
+/* Dashboard-specific styles */
+.sensor-value {
+  @apply text-lg font-mono bg-slate-800/40 px-3 py-1 rounded-md border border-white/10;
+}
+
+.data-grid {
+  @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4;
+}
+
+.chart-container {
+  @apply overflow-hidden rounded-xl glass-card p-1;
+}
+
+.critical-alert {
+  @apply bg-red-500/10 border-red-500/30 text-red-400;
+}
+
+.warning-alert {
+  @apply bg-amber-500/10 border-amber-500/30 text-amber-400;
+}
+
+.success-alert {
+  @apply bg-green-500/10 border-green-500/30 text-green-400;
+}
+
+/* Data values with indicators */
+.data-indicator {
+  position: relative;
+}
+.data-indicator::before {
+  content: '';
+  @apply absolute -left-3 top-1/2 -translate-y-1/2 size-2 rounded-full;
+}
+.data-indicator.normal::before {
+  @apply bg-green-500;
+}
+.data-indicator.warning::before {
+  @apply bg-amber-500;
+}
+.data-indicator.critical::before {
+  @apply bg-red-500;
 }
